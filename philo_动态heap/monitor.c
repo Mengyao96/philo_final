@@ -6,7 +6,7 @@
 /*   By: mezhang <mezhang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/28 17:18:32 by tracy             #+#    #+#             */
-/*   Updated: 2025/09/17 09:43:18 by mezhang          ###   ########.fr       */
+/*   Updated: 2025/09/17 09:50:25 by mezhang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,8 @@ int	check_philo_death(t_data *data, int num)
 
 void	monitoring(t_data *data, int num)
 {
-	int should_continue ;
+	int	should_continue;
+
 	should_continue = 1;
 	while (should_continue)
 	{

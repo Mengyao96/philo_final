@@ -6,7 +6,7 @@
 /*   By: mezhang <mezhang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/27 20:46:29 by mezhang           #+#    #+#             */
-/*   Updated: 2025/09/17 09:42:52 by mezhang          ###   ########.fr       */
+/*   Updated: 2025/09/17 09:47:47 by mezhang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void	setup_philo(t_data *data, pthread_mutex_t *forks, char **av)
 		if (av[5])
 			philos[i].num_must_eat = ft_atoi(av[5]);
 		else
-			philos[i].num_must_eat = -1; // 无限制
+			philos[i].num_must_eat = -1;
 		philos[i].start_time = get_time();
 		philos[i].last_meal_time = get_time();
 		philos[i].time_to_die = ft_atoi(av[2]);

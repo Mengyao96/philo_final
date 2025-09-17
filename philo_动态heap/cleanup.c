@@ -6,7 +6,7 @@
 /*   By: mezhang <mezhang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/27 20:55:46 by mezhang           #+#    #+#             */
-/*   Updated: 2025/09/17 09:42:43 by mezhang          ###   ########.fr       */
+/*   Updated: 2025/09/17 09:47:36 by mezhang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,6 @@ void	cleanup(t_data *data, pthread_mutex_t *forks, int num)
 		free(data->philos);
 		data->philos = NULL;
 	}
-	// Dynamic forks allocation - need to destroy and free
 	if (forks)
 		free_forks(forks, num);
 	pthread_mutex_destroy(&(data->print_lock));

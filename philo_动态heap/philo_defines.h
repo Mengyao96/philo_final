@@ -1,12 +1,12 @@
-/* ****************************************************************** */
+/* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   philo_defines.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tracy <tracy@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mezhang <mezhang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/09/04 20:59:40 by tracy             #+#    #+#             */
-/*   Updated: 2025/09/12 22:14:24 by tracy            ###   ########.fr       */
+/*   Created: 2025/09/17 09:51:17 by mezhang           #+#    #+#             */
+/*   Updated: 2025/09/17 10:00:17 by mezhang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,12 @@
 # define PHILO_DEFINES_H
 
 # include <pthread.h>
-# include <unistd.h>
-# include <stdlib.h>
 # include <stdio.h>
+# include <stdlib.h>
 # include <string.h>
-// # include <machine/types.h>
-# include <sys/types.h>
+# include <unistd.h>
 # include <sys/time.h>
+# include <sys/types.h>
 
 typedef struct s_data
 {
@@ -33,24 +32,23 @@ typedef struct s_data
 
 typedef struct s_philo
 {
-	pthread_t		thread_id; //main thread
+	pthread_t		thread_id;
 	int				id;
-	int				num_eaten; //shared
-	int				eating; // 关键改进：添加eating状态保护
+	int				num_eaten;
+	int				eating;
 	int				num_must_eat;
 
 	long long		start_time;
 	long long		last_meal_time;
-	long long 		time_to_die;
+	long long		time_to_die;
 	long long		time_to_eat;
 	long long		time_to_sleep;
 
 	t_data			*data;
 	pthread_mutex_t	*l_fork;
 	pthread_mutex_t	*r_fork;
-	pthread_mutex_t	lock; // 添加哲学家私有数据保护锁
+	pthread_mutex_t	lock;
 
-}	t_philo;
-
+}					t_philo;
 
 #endif
