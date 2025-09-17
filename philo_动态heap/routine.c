@@ -6,7 +6,7 @@
 /*   By: mezhang <mezhang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/27 21:53:12 by mezhang           #+#    #+#             */
-/*   Updated: 2025/09/17 09:42:19 by mezhang          ###   ########.fr       */
+/*   Updated: 2025/09/17 13:51:29 by mezhang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,15 +33,18 @@ void	*philo_routine(void *param)
 		precise_sleep(2, philo);
 	while (!get_is_end(philo->data))
 	{
+		philo_thinking(philo);
+		if (get_is_end(philo->data))
+			break ;
 		if (!get_both_forks(philo, &first, &second))
 			break ;
 		philo_eating(philo, &first, &second);
 		if (get_is_end(philo->data))
 			break ;
 		philo_sleeping(philo);
-		if (get_is_end(philo->data))
-			break ;
-		philo_thinking(philo);
+		// if (get_is_end(philo->data))
+		// 	break ;
+		// philo_thinking(philo);
 	}
 	return (NULL);
 }
