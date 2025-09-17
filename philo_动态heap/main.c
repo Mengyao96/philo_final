@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tracy <tracy@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mezhang <mezhang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/27 16:41:46 by mezhang           #+#    #+#             */
-/*   Updated: 2025/09/16 23:25:19 by tracy            ###   ########.fr       */
+/*   Updated: 2025/09/17 09:42:57 by mezhang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@ int	main(int argc, char **argv)
 
 	if (argc < 5 || argc > 6)
 		return (printf("Error: Too Few Arguments.\n"), 1);
-
 	num = ft_atoi(argv[1]);
 	if (init_data(&data, argv, argc, num) < 0)
 		return (1);
@@ -28,7 +27,6 @@ int	main(int argc, char **argv)
 		return (1);
 	if (launch_philos(&data, forks, num, argv) < 0)
 		return (1);
-
 	philos_start(&data, num);
 	monitoring(&data, num);
 	cleanup(&data, forks, num);

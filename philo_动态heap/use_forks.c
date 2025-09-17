@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   use_forks.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tracy <tracy@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mezhang <mezhang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/07 22:04:19 by tracy             #+#    #+#             */
-/*   Updated: 2025/09/16 03:05:24 by tracy            ###   ########.fr       */
+/*   Updated: 2025/09/17 09:43:37 by mezhang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,16 @@
 void	get_forks_order(t_philo *philo, pthread_mutex_t **first,
 		pthread_mutex_t **second)
 {
-	*first = philo->r_fork;
-	*second = philo->l_fork;
+	if (philo->r_fork < philo->l_fork)
+	{
+		*first = philo->r_fork;
+		*second = philo->l_fork;
+	}
+	else
+	{
+		*first = philo->l_fork;
+		*second = philo->r_fork;
+	}
 }
 
 int	get_a_fork(t_philo *philo, pthread_mutex_t *fork)

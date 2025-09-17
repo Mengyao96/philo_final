@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   activities.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tracy <tracy@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mezhang <mezhang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/07 00:20:20 by tracy             #+#    #+#             */
-/*   Updated: 2025/09/16 02:56:51 by tracy            ###   ########.fr       */
+/*   Updated: 2025/09/17 09:42:38 by mezhang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,9 @@ void	self_check_death(t_philo *philo)
 		if (!philo->data->one_die)
 		{
 			philo->data->one_die = 1;
+			pthread_mutex_unlock(&philo->data->die_lock);
 			safe_print(philo, "died");
+			return ;
 		}
 		pthread_mutex_unlock(&philo->data->die_lock);
 	}
@@ -51,20 +53,16 @@ void	philo_thinking(t_philo *philo)
 void	philo_eating(t_philo *philo, pthread_mutex_t **first,
 		pthread_mutex_t **second)
 {
-
 	pthread_mutex_lock(&philo->lock);
 	philo->eating = 1;
 	philo->last_meal_time = get_time();
 	philo->num_eaten += 1;
 	pthread_mutex_unlock(&philo->lock);
-
 	safe_print(philo, "is eating");
 	precise_sleep(philo->time_to_eat, philo);
-
 	pthread_mutex_lock(&philo->lock);
 	philo->eating = 0;
 	pthread_mutex_unlock(&philo->lock);
-
 	take_off_forks(first, second);
 }
 

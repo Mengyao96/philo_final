@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cleanup.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tracy <tracy@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mezhang <mezhang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/27 20:55:46 by mezhang           #+#    #+#             */
-/*   Updated: 2025/09/16 23:25:19 by tracy            ###   ########.fr       */
+/*   Updated: 2025/09/17 09:42:43 by mezhang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,9 @@ void	stop_philos(t_data *data, int count)
 {
 	int	i;
 
-	data->one_die = 1; // 替代set_is_end
+	pthread_mutex_lock(&(data->die_lock));
+	data->one_die = 1;
+	pthread_mutex_unlock(&(data->die_lock));
 	i = 0;
 	while (i < count)
 	{
@@ -63,7 +65,6 @@ void	cleanup(t_data *data, pthread_mutex_t *forks, int num)
 	// Dynamic forks allocation - need to destroy and free
 	if (forks)
 		free_forks(forks, num);
-
 	pthread_mutex_destroy(&(data->print_lock));
 	pthread_mutex_destroy(&(data->die_lock));
 	pthread_mutex_destroy(&(data->eat_lock));

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   time.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tracy <tracy@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mezhang <mezhang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/04 21:12:11 by tracy             #+#    #+#             */
-/*   Updated: 2025/09/16 03:05:35 by tracy            ###   ########.fr       */
+/*   Updated: 2025/09/17 09:37:00 by mezhang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,11 +26,10 @@ void	precise_sleep(long long time_to_sleep, t_philo *philo)
 {
 	long long	start_time;
 
+	(void)philo;
 	start_time = get_time();
 	while ((get_time() - start_time) < time_to_sleep)
 	{
-		if (get_is_end(philo->data))
-			return ;
 		usleep(500);
 	}
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   launch.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tracy <tracy@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mezhang <mezhang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/27 20:46:29 by mezhang           #+#    #+#             */
-/*   Updated: 2025/09/16 23:25:19 by tracy            ###   ########.fr       */
+/*   Updated: 2025/09/17 09:42:52 by mezhang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int	launch_forks(pthread_mutex_t **forks, int num)
 
 void	setup_philo(t_data *data, pthread_mutex_t *forks, char **av)
 {
-	int i;
+	int		i;
 	t_philo	*philos;
 
 	philos = data->philos;
@@ -55,7 +55,7 @@ void	setup_philo(t_data *data, pthread_mutex_t *forks, char **av)
 		philos[i].l_fork = &(forks[i]);
 		philos[i].r_fork = &(forks[(i + 1) % ft_atoi(av[1])]);
 		if (pthread_mutex_init(&philos[i].lock, NULL) != 0)
-			return;
+			return ;
 		i++;
 	}
 }
@@ -65,10 +65,6 @@ int	launch_philos(t_data *data, pthread_mutex_t *forks, int num, char **av)
 	data->philos = malloc(sizeof(t_philo) * num);
 	if (!data->philos)
 		return (printf("Error: Failed to malloc philos.\n"), -1);
-
 	setup_philo(data, forks, av);
 	return (0);
 }
-
-
-

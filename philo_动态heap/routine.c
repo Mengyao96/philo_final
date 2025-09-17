@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   routine.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tracy <tracy@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mezhang <mezhang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/27 21:53:12 by mezhang           #+#    #+#             */
-/*   Updated: 2025/09/16 03:18:13 by tracy            ###   ########.fr       */
+/*   Updated: 2025/09/17 09:42:19 by mezhang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,22 +28,20 @@ void	*philo_routine(void *param)
 	philo = (t_philo *)param;
 	get_forks_order(philo, &first, &second);
 	if (first == second)
-	{
-		one_philo_routine(philo);
-		return (NULL);
-	}
+		return (one_philo_routine(philo), NULL);
 	if (philo->id % 2 == 0)
 		precise_sleep(2, philo);
 	while (!get_is_end(philo->data))
 	{
-		philo_thinking(philo);
-		pthread_mutex_lock(first);
-		safe_print(philo, "has taken a fork");
-		pthread_mutex_lock(second);
-		safe_print(philo, "has taken a fork");
-
+		if (!get_both_forks(philo, &first, &second))
+			break ;
 		philo_eating(philo, &first, &second);
+		if (get_is_end(philo->data))
+			break ;
 		philo_sleeping(philo);
+		if (get_is_end(philo->data))
+			break ;
+		philo_thinking(philo);
 	}
 	return (NULL);
 }

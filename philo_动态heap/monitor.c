@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   monitor.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tracy <tracy@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mezhang <mezhang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/28 17:18:32 by tracy             #+#    #+#             */
-/*   Updated: 2025/09/16 23:28:16 by tracy            ###   ########.fr       */
+/*   Updated: 2025/09/17 09:43:18 by mezhang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,18 +48,17 @@ int	is_philo_dead(t_philo *philo)
 	current_time = get_time();
 	pthread_mutex_lock(&philo->lock);
 	time_since_meal = current_time - philo->last_meal_time;
-	is_eating = philo->eating;  // 在锁内获取eating状态
+	is_eating = philo->eating;
 	pthread_mutex_unlock(&philo->lock);
-
 	if (time_since_meal > philo->time_to_die && !is_eating)
 	{
 		pthread_mutex_lock(&philo->data->die_lock);
 		if (!philo->data->one_die)
 		{
 			philo->data->one_die = 1;
-			pthread_mutex_lock(&philo->data->print_lock);
-			printf("%lld %d died\n", current_time - philo->start_time, philo->id);
-			pthread_mutex_unlock(&philo->data->print_lock);
+			pthread_mutex_unlock(&philo->data->die_lock);
+			safe_print(philo, "died");
+			return (1);
 		}
 		pthread_mutex_unlock(&philo->data->die_lock);
 		return (1);
@@ -83,18 +82,15 @@ int	check_philo_death(t_data *data, int num)
 
 void	monitoring(t_data *data, int num)
 {
-	int should_continue;
-
+	int should_continue ;
 	should_continue = 1;
 	while (should_continue)
 	{
 		if (check_philo_death(data, num) || all_fed(data, num))
-			break;
-
+			break ;
 		pthread_mutex_lock(&data->die_lock);
 		should_continue = !data->one_die;
 		pthread_mutex_unlock(&data->die_lock);
-
 		usleep(1000);
 	}
 }

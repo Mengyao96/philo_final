@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   initiate.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tracy <tracy@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mezhang <mezhang@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/15 00:04:41 by tracy             #+#    #+#             */
-/*   Updated: 2025/09/16 23:27:54 by tracy            ###   ########.fr       */
+/*   Updated: 2025/09/17 09:42:47 by mezhang          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static int	input_check(char **av)
 {
-		int	i;
+	int	i;
 	int	j;
 
 	i = 1;
@@ -38,10 +38,8 @@ int	init_data(t_data *data, char **av, int ac, int num)
 	if (input_check(av) != 0)
 		return (printf("Error: Must be positive digits.\n"), -1);
 	ft_memset(data, 0, sizeof(t_data));
-
 	if (num < 1 || num > 200)
 		return (printf("Error: Number of philosophers must be 1-200.\n"), -1);
-
 	if (pthread_mutex_init(&(data->print_lock), NULL) != 0)
 		return (printf("Error: Failed to init print_lock.\n"), -1);
 	if (pthread_mutex_init(&(data->die_lock), NULL) != 0)
